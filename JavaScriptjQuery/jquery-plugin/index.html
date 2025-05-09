@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Plugin Demo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="plugin.js"></script>
+    <style>
+        .row { margin-bottom: 10px; }
+        .row input { margin-right: 10px; }
+    </style>
+</head>
+<body>
+
+<div id="formContainer"></div>
+<button id="addRowBtn">Add Row</button>
+
+<script>
+    $(document).ready(function () {
+        // Initialize plugin
+        $('#formContainer').dynamicFields({
+            addButton: '#addRowBtn',
+            maxRows: 5
+        });
+    });
+</script>
+
+</body>
+</html>

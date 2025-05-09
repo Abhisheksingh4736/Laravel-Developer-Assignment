@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File Without Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <h1>Upload File without Form</h1>
+
+    <!-- File input and upload button -->
+    <input type="file" id="fileInput" />
+    <button id="uploadButton">Upload File</button>
+
+    <!-- Area to display upload status or response -->
+    <div id="status"></div>
+
+    <script>
+        // Handle the button click event
+        $('#uploadButton').click(function() {
+            var file = $('#fileInput')[0].files[0]; // Get the selected file
+
+            if (file) {
+                // Prepare FormData
+                var formData = new FormData();
+                formData.append('file', file);  // Append file to FormData
+
+                // Perform AJAX file upload
+                $.ajax({
+                    url: 'upload.php',   // Server-side script to handle the file upload
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,  // Don't set content type for multipart
+                    processData: false,  // Don't process data (for file uploads)
+                    success: function(response) {
+                        $('#status').html('File uploaded successfully: ' + response);
+                    },
+                    error: function(xhr, status, error) {
+                        $('#status').html('Error uploading file: ' + error);
+                    }
+                });
+            } else {
+                $('#status').html('Please select a file to upload.');
+            }
+        });
+    </script>
+
+</body>
+</html>
